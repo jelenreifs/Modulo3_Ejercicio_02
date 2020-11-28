@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+
+import sistemaSolar from './sistemaSolar';
+import Planeta from './Planeta';
+import React, { useState } from 'react';
 
 function App() {
+
+  const [sistemaEstado, setSistemaEstado] = useState(1);
+  
+  const removeLast = () => {
+   const array = [];
+    for (var i = 0; i < sistemaEstado.length; i++) {
+     array.push(sistemaEstado[i])
+    }
+    setSistemaEstado(array);
+  }
+
+  const sistema = sistemaSolar.map(planeta => {
+      return (
+        <Planeta
+          nombre={planeta.nombre}
+          color={planeta.color}
+          temperatura={planeta.temperatura}
+          imagen={planeta.imagen}
+        />
+      )
+    })
+    
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <div className="center">
+      <div className="planetas-wrapper">
+        {sistema}
+        </div>
+      <button onClick={removeLast}>Borrar planeta</button >
+      </div>
+  )
 }
 
 export default App;
+
+
